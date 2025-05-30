@@ -1,0 +1,41 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Clone Repository') {
+      steps {
+        git(
+          url: 'https://github.com/aasiamoqeem/PlaywrightCucumber.git',
+          branch: 'main'
+        )
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm install'
+        sh 'npx playwright install --with-deps'
+      }
+    }
+
+    stage('Run Cucumber Tests') {
+      steps {
+        sh 'npx playwright test --project=chromium --reporter=cucumber-json'
+      }
+    }
+
+    stage('Generate Allure Report') {
+      steps {
+        sh 'npx allure generate allure-results --clean -o allure-report'
+        sh 'npx allure open allure-report &'
+      }
+    }
+  }
+
+  post {
+    always {
+      // Attach allure results to Jenkins if plugin is configured
+      allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "loginType": "valid",
+    "email": "pet.store@gmail.com",
+    "password": "password"
+  },
+  {
+    "loginType": "invalid",
+    "email": "invaliduser@gmail.com",
+    "password": "wrongPassword"
+  }
+]

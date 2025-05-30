@@ -1,0 +1,9 @@
+[
+  {
+    "scenario": "validUser",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "subject": "Feedback",
+    "message": "This is a test message"
+  }
+]

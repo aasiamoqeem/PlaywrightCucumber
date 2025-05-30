@@ -1,0 +1,20 @@
+[
+  {
+    "id": 10,
+    "name": "Fluffy",
+    "status": "available",
+    "newName": "UpdatedFluffy"
+  },
+  {
+    "id": 6,
+    "name": "Bear",
+    "status": "available",
+    "newName": "UpdatedBear"
+  },
+  {
+    "id": 9,
+    "name": "Bunny",
+    "status": "available",
+    "newName": "UpdatedBunny"
+  }
+]
