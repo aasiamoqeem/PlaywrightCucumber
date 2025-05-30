@@ -1,4 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
 import { searchProduct } from '../../../pages/searchProduct';
 import { readFileSync } from 'fs';
 import path from 'path';
@@ -10,7 +11,7 @@ Given('I click on the "Products" button', async function (buttonName: string) {
 });
 
 Then('I should be navigated to the ALL PRODUCTS page successfully', async function () {
-  // Implementation here
+  await expect(this.page).toHaveURL(process.env.BASE_URL as string);
 });
 
 When('I search for the product {string}', async function (productName: string) {
