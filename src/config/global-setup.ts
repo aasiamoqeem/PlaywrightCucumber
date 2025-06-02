@@ -1,7 +1,7 @@
-import { chromium, expect } from 'playwright/test';
+import { chromium, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
-import { login } from '../pages/login'; 
+import { Login } from '../pages/login'; 
 
 const storageStatePath = path.resolve(__dirname, '../../authState.json');
 async function globalSetup() {
@@ -21,7 +21,7 @@ async function globalSetup() {
   // Find the valid user credentials
   const validUser = loginData.find((u: any) => u.loginType === 'valid');
 
-  const loginPage = new login(page);
+  const loginPage = new Login(page);
   await loginPage.clickLoginLink();
   console.log(validUser.email)
 

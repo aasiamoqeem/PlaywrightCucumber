@@ -1,6 +1,6 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
-import { login } from '../../../pages/login';
+import { Login } from '../../../pages/login';
 import { readFileSync } from 'fs';
 import path from 'path';
 import '../../../config/env';
@@ -13,7 +13,7 @@ interface LoginUser {
 }
 
 Given('I navigate to the login page', async function () {
-  this.loginPage = new login(this.page);
+  this.loginPage = new Login(this.page);
   await this.loginPage.clickLoginLink();
   // Load test data
   const dataPath = path.resolve(__dirname, '../test-data/login.json');

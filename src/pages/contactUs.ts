@@ -1,7 +1,7 @@
 import { Page,Locator, expect} from '@playwright/test';
 
 
-export class contactUs {
+export class ContactUs {
     page: Page;
     contactUsLink: Locator;
     name: Locator;

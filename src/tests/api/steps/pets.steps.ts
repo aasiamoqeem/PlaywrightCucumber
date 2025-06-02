@@ -1,24 +1,22 @@
 import {  Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
-import { request, APIRequestContext, APIResponse } from 'playwright';
+import { expect } from '@playwright/test';;
 import * as fs from 'fs';
 import path, {join} from 'path';
 import '../../../config/env';
 
-setDefaultTimeout(30 * 1000);
-
-
 const baseUrl = process.env.BASE_API_URL as string;
 
-
-
 //Get a list of available pets
-Given('the API endpoint is {string}', async function (endpointPath: string) {
-  this.endpoint = `${baseUrl}${endpointPath}`;
+Given('the API endpoint is entered', async function () {
+  this.endpoint = `${baseUrl}"/pet/findByStatus?status=available"`;
 });
 
 When('I fetch pets', async function () {
-  this.response = await this.apiContext.get(this.endpoint);
+  this.response = await this.apiContext.get(this.endpoint, {
+    headers: {
+      'accept': 'application/json'
+    }
+  });
   this.responseBody = await this.response.json();
 });
 
@@ -42,6 +40,10 @@ When('I update each pet with its new name', async function () {
   this.updateResponses = [];
   for (const pet of this.testData) {
     const res = await this.apiContext.post(`${baseUrl}/pet/${pet.id}?name=${encodeURIComponent(pet.newName)}&status=${encodeURIComponent(pet.status)}`, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
       data: {
         id: pet.id,
         name: pet.newName,

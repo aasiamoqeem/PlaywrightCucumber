@@ -2,8 +2,7 @@
 Feature: Contact Us Form Submission
 
   Scenario Outline: User submits the contact us form successfully
-    Given I navigate to the home page
-    Then I should see the home page visible successfully
+    Given I should see the home page visible successfully
     When I click on the "Contact Us" button
     Then I should see "GET IN TOUCH" visible
     When I enter contact details for "<scenario>"

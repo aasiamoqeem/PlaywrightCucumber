@@ -1,6 +1,6 @@
+@gui @search
 Feature: Product Search Functionality
 
-  @gui @search
   Scenario: User searches for a product and views the results
     Given I click on the "Products" button
     Then I should be navigated to the ALL PRODUCTS page successfully

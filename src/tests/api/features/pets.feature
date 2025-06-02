@@ -2,7 +2,7 @@
 Feature: Pet Operations
 
   Scenario: Get a list of available pets
-    Given the API endpoint is "/pet/findByStatus?status=available"
+    Given the API endpoint is entered
     When I fetch pets
     Then the response status code should be 200
     And the response should contain atleast one pet

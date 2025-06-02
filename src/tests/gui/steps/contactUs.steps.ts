@@ -1,10 +1,10 @@
 import { Before, After,Given, When, Then } from '@cucumber/cucumber';
 import { chromium, Browser, Page, expect } from '@playwright/test';
-import { contactUs } from '../../../pages/contactUs';
+import { ContactUs } from '../../../pages/contactUs';
 import { readFileSync } from 'fs';
 import path from 'path';
 import '../../../config/env';
-import { Dialog } from 'playwright'; 
+import { Dialog } from '@playwright/test'; 
 
 
 
@@ -17,18 +17,12 @@ interface contactDetails {
 }
 
 
-
-Given('I navigate to the home page', async function () {
-    await this.page.goto(process.env.BASE_URL as string);
-    console.log(process.env.BASE_URL)
-});
-
-Then('I should see the home page visible successfully', async function () {
+Given('I should see the home page visible successfully', async function () {
     await expect(this.page).toHaveURL(process.env.BASE_URL as string);
 });
 
 When('I click on the "Contact Us" button', async function () {
-    this.contactUsPage = new contactUs(this.page);
+    this.contactUsPage = new ContactUs(this.page);
     await this.contactUsPage.clickContactUsLink();
     // Load test data
     const dataPath = path.resolve(__dirname, '../test-data/contactUs.json');
@@ -60,6 +54,7 @@ When('I click the "Submit" button and accept the alert', async function () {
 
 
 Then('I should see success message {string}', async function (string) {
+    await this.contactUsPage.successMessage.waitFor({ state: 'visible'});
     await expect(this.contactUsPage.successMessage).toBeVisible();
 });
 
