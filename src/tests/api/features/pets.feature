@@ -1,17 +1,18 @@
 @api
-Feature: Pet Operations
+Feature: Pet Operations via API
+
+  Background:
+    Given the API client is initialized
 
   Scenario: Get a list of available pets
-    Given the API endpoint is entered
     When I fetch pets
     Then the response status code should be 200
     And the response should contain atleast one pet
 
-
   Scenario: Update pets using JSON test data
     Given I load pet test data from "test-data/pets.json"
     When I update each pet with its new name
-    Then each pet update response status should be 200      
+    Then each pet update response status should be 200
 
   Scenario: Delete a pet by ID
     Given a pet with ID 1001
