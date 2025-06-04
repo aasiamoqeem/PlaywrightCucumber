@@ -9,21 +9,23 @@ export class PetApiClient {
     });
   }
 
-  async updatePet(pet: { id: number; newName: string; status: string }): Promise<APIResponse> {
-    return await this.apiContext.post(
+  async updatePet(pet: { id: number; newName: string; status: string }): Promise<{response: APIResponse; requestPayload: any }> {
+    const payload = {
+    id: pet.id,
+    name: pet.newName,
+    status: pet.status,
+    };
+    const response = await this.apiContext.post(
       `${this.baseUrl}/pet/${pet.id}?name=${encodeURIComponent(pet.newName)}&status=${encodeURIComponent(pet.status)}`,
       {
         headers: {
           accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        data: {
-          id: pet.id,
-          name: pet.newName,
-          status: pet.status,
-        },
+        data: payload,
       }
     );
+    return { response, requestPayload: payload };
   }
 
   async deletePet(petId: number): Promise<APIResponse> {
