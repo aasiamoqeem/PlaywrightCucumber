@@ -7,3 +7,4 @@ node_modules/
 /playwright/.cache/
 /authState.json/
 /allure-results/
+/authState.json/
